@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\netcoreapp2.2\</OutputPath>
+    <DocumentationFile>bin\Debug\netcoreapp2.2\ViewModel.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\Release\netcoreapp2.2\</OutputPath>
+    <DocumentationFile>bin\Release\netcoreapp2.2\ViewModel.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dtol\Dtol.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MaintainSystem\RequestViewModel\" />
+    <Folder Include="UserSystem\MiddleViewModel\" />
+    <Folder Include="ViewValitor\ActivitySystem\" />
+    <Folder Include="ViewValitor\InformSystem\" />
+    <Folder Include="ViewValitor\InhabitantSystem\" />
+  </ItemGroup>
+  
+</Project>

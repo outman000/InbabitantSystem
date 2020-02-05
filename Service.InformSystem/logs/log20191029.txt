@@ -1,0 +1,87 @@
+2019-10-29 09:05:45.662 +08:00 [INF] host is start
+2019-10-29 09:05:51.532 +08:00 [FTL] Host terminated unexpectedly
+System.IO.IOException: Failed to bind to address https://localhost:5001. ---> System.AggregateException: One or more errors occurred. (以一种访问权限不允许的方式做了一个访问套接字的尝试。) (以一种访问权限不允许的方式做了一个访问套接字的尝试。) ---> System.Net.Sockets.SocketException: 以一种访问权限不允许的方式做了一个访问套接字的尝试。
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransport.BindAsync()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.<>c__DisplayClass21_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context)
+   --- End of inner exception stack trace ---
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(IServerAddressesFeature addresses, KestrelServerOptions serverOptions, ILogger logger, Func`2 createBinding)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token, String shutdownMessage)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(IWebHost host)
+   at Service.InformSystem.Program.Main(String[] args) in F:\社发局居民\InhabitantService\InhabitantSystem\Service.InformSystem\Program.cs:line 39
+2019-10-29 09:06:18.671 +08:00 [INF] host is start
+2019-10-29 09:06:23.692 +08:00 [FTL] Host terminated unexpectedly
+System.IO.IOException: Failed to bind to address https://localhost:5001. ---> System.AggregateException: One or more errors occurred. (以一种访问权限不允许的方式做了一个访问套接字的尝试。) (以一种访问权限不允许的方式做了一个访问套接字的尝试。) ---> System.Net.Sockets.SocketException: 以一种访问权限不允许的方式做了一个访问套接字的尝试。
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransport.BindAsync()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.<>c__DisplayClass21_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context)
+   --- End of inner exception stack trace ---
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(IServerAddressesFeature addresses, KestrelServerOptions serverOptions, ILogger logger, Func`2 createBinding)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token, String shutdownMessage)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(IWebHost host)
+   at Service.InformSystem.Program.Main(String[] args) in F:\社发局居民\InhabitantService\InhabitantSystem\Service.InformSystem\Program.cs:line 39
+2019-10-29 09:06:50.192 +08:00 [INF] host is start
+2019-10-29 09:06:53.288 +08:00 [FTL] Host terminated unexpectedly
+System.IO.IOException: Failed to bind to address https://localhost:5001. ---> System.AggregateException: One or more errors occurred. (以一种访问权限不允许的方式做了一个访问套接字的尝试。) (以一种访问权限不允许的方式做了一个访问套接字的尝试。) ---> System.Net.Sockets.SocketException: 以一种访问权限不允许的方式做了一个访问套接字的尝试。
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransport.BindAsync()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.<>c__DisplayClass21_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context)
+   --- End of inner exception stack trace ---
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(IServerAddressesFeature addresses, KestrelServerOptions serverOptions, ILogger logger, Func`2 createBinding)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token, String shutdownMessage)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(IWebHost host)
+   at Service.InformSystem.Program.Main(String[] args) in F:\社发局居民\InhabitantService\InhabitantSystem\Service.InformSystem\Program.cs:line 39
+2019-10-29 09:07:40.373 +08:00 [INF] host is start
+2019-10-29 09:41:43.694 +08:00 [INF] host is start
+2019-10-29 10:01:42.042 +08:00 [INF] host is start
+2019-10-29 10:04:23.062 +08:00 [INF] host is start
+2019-10-29 10:05:18.926 +08:00 [INF] 查询信息成功
+2019-10-29 10:09:43.723 +08:00 [INF] host is start
+2019-10-29 10:10:19.948 +08:00 [INF] 查询信息成功
+2019-10-29 10:11:07.287 +08:00 [INF] 查询信息成功
+2019-10-29 10:11:27.453 +08:00 [INF] 查询信息成功
+2019-10-29 10:11:47.072 +08:00 [INF] 查询信息成功
+2019-10-29 10:11:56.812 +08:00 [INF] 查询信息成功
+2019-10-29 10:12:03.412 +08:00 [INF] 查询信息成功
+2019-10-29 10:12:16.468 +08:00 [INF] host is start
+2019-10-29 10:12:44.021 +08:00 [INF] 查询信息成功
+2019-10-29 10:17:14.860 +08:00 [INF] host is start
+2019-10-29 10:18:20.302 +08:00 [INF] 查询信息成功
+2019-10-29 10:19:13.727 +08:00 [INF] 查询信息成功
+2019-10-29 10:22:02.058 +08:00 [INF] 查询信息成功
+2019-10-29 10:22:40.786 +08:00 [INF] 查询信息成功
+2019-10-29 10:23:38.722 +08:00 [INF] 查询信息成功
+2019-10-29 10:42:22.136 +08:00 [INF] host is start

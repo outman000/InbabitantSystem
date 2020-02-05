@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20190925070329_createResidentialArea1.cs" />
+    <Compile Remove="Migrations\20190925070614_createResidentialArea11.cs" />
+    <Compile Remove="Migrations\20190926073305_building.cs" />
+    <Compile Remove="Migrations\20190927042524_addstatus1.cs" />
+    <Compile Remove="Migrations\20191009024628_addResidentInfo.cs" />
+    <Compile Remove="Migrations\20191009024913_addResidentInfo.cs" />
+    <Compile Remove="Migrations\20191009025135_addResidentInfo.cs" />
+    <Compile Remove="Migrations\20191009030054_addhouseInfo.cs" />
+    <Compile Remove="Migrations\20191009030231_addIdentity.cs" />
+    <Compile Remove="Migrations\20191009030302_addIdentity.cs" />
+    <Compile Remove="Migrations\20191009030346_addIdentity.cs" />
+    <Compile Remove="Migrations\20191112031356_1112updateCity.cs" />
+  </ItemGroup>
+
+    <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+
+</Project>

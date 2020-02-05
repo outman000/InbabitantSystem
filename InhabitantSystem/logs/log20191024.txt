@@ -1,0 +1,71 @@
+2019-10-24 09:32:55.382 +08:00 [INF] host is start
+2019-10-24 09:34:47.405 +08:00 [INF] 查询信息成功
+2019-10-24 09:35:54.003 +08:00 [INF] 查询信息成功
+2019-10-24 09:37:56.107 +08:00 [INF] 查询信息成功
+2019-10-24 09:40:03.779 +08:00 [INF] 查询信息成功
+2019-10-24 09:41:15.767 +08:00 [INF] 查询信息成功
+2019-10-24 09:44:53.663 +08:00 [INF] host is start
+2019-10-24 09:45:34.377 +08:00 [INF] 查询信息成功
+2019-10-24 09:51:30.392 +08:00 [INF] host is start
+2019-10-24 09:58:54.742 +08:00 [INF] host is start
+2019-10-24 09:59:36.099 +08:00 [INF] 查询信息成功
+2019-10-24 10:45:28.988 +08:00 [INF] host is start
+2019-10-24 10:45:34.900 +08:00 [FTL] Host terminated unexpectedly
+System.IO.IOException: Failed to bind to address https://127.0.0.1:5001: address already in use. ---> Microsoft.AspNetCore.Connections.AddressInUseException: 通常每个套接字地址(协议/网络地址/端口)只允许使用一次。 ---> System.Net.Sockets.SocketException: 通常每个套接字地址(协议/网络地址/端口)只允许使用一次。
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransport.BindAsync()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransport.BindAsync()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.<>c__DisplayClass21_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(IServerAddressesFeature addresses, KestrelServerOptions serverOptions, ILogger logger, Func`2 createBinding)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token, String shutdownMessage)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token)
+   at Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(IWebHost host)
+   at InhabitantSystem.Program.Main(String[] args) in F:\社发局居民\InhabitantService\InhabitantSystem\InhabitantSystem\Program.cs:line 39
+2019-10-24 11:14:17.083 +08:00 [INF] host is start
+2019-10-24 11:14:44.494 +08:00 [INF] 查询信息成功
+2019-10-24 11:15:53.067 +08:00 [INF] 查询信息成功
+2019-10-24 11:44:51.856 +08:00 [INF] host is start
+2019-10-24 11:45:28.294 +08:00 [INF] 查询信息成功
+2019-10-24 11:49:46.313 +08:00 [INF] host is start
+2019-10-24 11:50:51.304 +08:00 [INF] 查询信息成功
+2019-10-24 11:51:11.321 +08:00 [INF] host is start
+2019-10-24 14:06:45.309 +08:00 [INF] host is start
+2019-10-24 14:08:18.433 +08:00 [INF] 查询信息成功
+2019-10-24 14:08:49.894 +08:00 [INF] 查询信息成功
+2019-10-24 14:25:21.451 +08:00 [INF] host is start
+2019-10-24 15:09:37.685 +08:00 [INF] host is start
+2019-10-24 15:13:04.827 +08:00 [INF] host is start
+2019-10-24 15:13:40.724 +08:00 [INF] host is start
+2019-10-24 15:18:45.931 +08:00 [INF] host is start
+2019-10-24 15:22:43.016 +08:00 [INF] host is start
+2019-10-24 15:31:02.667 +08:00 [INF] host is start
+2019-10-24 15:38:07.036 +08:00 [INF] host is start
+2019-10-24 15:39:32.198 +08:00 [INF] host is start
+2019-10-24 15:45:53.966 +08:00 [INF] host is start
+2019-10-24 15:47:37.312 +08:00 [INF] host is start
+2019-10-24 16:05:02.533 +08:00 [INF] host is start
+2019-10-24 16:08:23.586 +08:00 [INF] host is start
+2019-10-24 16:20:57.105 +08:00 [INF] host is start
+2019-10-24 16:31:59.372 +08:00 [INF] host is start
+2019-10-24 16:33:38.555 +08:00 [INF] 查询信息成功
+2019-10-24 16:37:35.071 +08:00 [INF] host is start
+2019-10-24 16:38:46.117 +08:00 [INF] host is start
+2019-10-24 16:41:06.670 +08:00 [INF] host is start
+2019-10-24 16:43:19.041 +08:00 [INF] host is start
+2019-10-24 16:48:01.136 +08:00 [INF] host is start
+2019-10-24 16:59:17.361 +08:00 [INF] host is start
+2019-10-24 17:01:42.788 +08:00 [INF] host is start
+2019-10-24 17:24:10.111 +08:00 [INF] host is start
+2019-10-24 17:25:05.983 +08:00 [INF] host is start
+2019-10-24 17:28:06.967 +08:00 [INF] host is start
