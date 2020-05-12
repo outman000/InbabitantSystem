@@ -474,7 +474,7 @@ namespace Dto.Repository.InhabitantSystem
             //姓名
             if (residentInfoSearchViewModel.Name !="")
             {
-                predicate = predicate.And(p => p.Name.Equals(residentInfoSearchViewModel.Name));
+                predicate = predicate.And(p => p.Name.Contains(residentInfoSearchViewModel.Name));
             }
             //身份证号
             if (residentInfoSearchViewModel.IdNumber != "")
