@@ -167,7 +167,7 @@ namespace ResidentialAreaSystem
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "用户管理文档 V1");
+                c.SwaggerEndpoint("./swagger/v1/swagger.json", "用户管理文档 V1");
                 c.RoutePrefix = string.Empty;
             });
 
