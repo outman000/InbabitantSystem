@@ -79,11 +79,11 @@ namespace Dto.Service.InhabitantSystem
                 {
                     InfoRelationShip[j].RelationWithHousehold = tempUpdateViewMiddle[i].RelationWithHousehold;
                     _houseInfoRelationShipRepository.Update(InfoRelationShip[j]);
-                    _houseInfoRelationShipRepository.SaveChanges();
+                  
                 }
 
             }
-
+            _houseInfoRelationShipRepository.SaveChanges();
             _inhabitantRepository.UpdateInfo(InhabitantUpdateModel);
 
 
