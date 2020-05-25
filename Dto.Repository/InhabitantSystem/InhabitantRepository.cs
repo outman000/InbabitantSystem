@@ -42,6 +42,7 @@ namespace Dto.Repository.InhabitantSystem
             foreach (ResidentInfo infoRelationShip in obj)
             {
                 DbSet.Update(infoRelationShip);
+         
             }
         }
 

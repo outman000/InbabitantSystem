@@ -71,7 +71,10 @@ namespace ViewModel.InhabitantSystem.RequestViewModel
         public int? EndAge { get; set; }
 
 
-
+        /// <summary>
+        /// 与户主关系
+        /// </summary>
+        public string RelationWithHousehold { get; set; }
 
     }
 }

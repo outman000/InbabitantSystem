@@ -2,6 +2,7 @@
 using Dto.IRepository.InhabitantSystem;
 using Dto.IService.InhabitantSystem;
 using Dtol.Dtol;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,14 @@ namespace Dto.Service.InhabitantSystem
     public class InhabitantService : IInhabitantService
     {
         private readonly IInhabitantRepository _inhabitantRepository;
+        private readonly IHouseInfoRelationShipRepository _houseInfoRelationShipRepository;
         private readonly IMapper _IMapper;
-        public InhabitantService(IInhabitantRepository inhabitantRepository, IMapper mapper)
+        public InhabitantService(IInhabitantRepository inhabitantRepository, IHouseInfoRelationShipRepository  houseInfoRelationShipRepository,
+              IMapper mapper)
         {
 
             _inhabitantRepository = inhabitantRepository;
+            _houseInfoRelationShipRepository = houseInfoRelationShipRepository;
             _IMapper = mapper;
         }
         /// <summary>
@@ -65,7 +69,26 @@ namespace Dto.Service.InhabitantSystem
         {
             var tempUpdateViewMiddle = inhabitantUpdateViewModel.inhabitantUpdateViewModel;
             var InhabitantUpdateModel = _IMapper.Map<List<InhabitantUpdateMiddle>, List<ResidentInfo>>(tempUpdateViewMiddle);
+
+            //var InfoRelationShip =  _IMapper.Map<List<InhabitantUpdateMiddle>, List<InfoRelationShip>>(tempUpdateViewMiddle);
+
+            for (int i = 0; i < InhabitantUpdateModel.Count; i++)
+            {
+                var InfoRelationShip = _houseInfoRelationShipRepository.InfoRelationShipSerachByIdNoWhere(InhabitantUpdateModel[i].Id.ToString());
+                for (int j = 0; j < InfoRelationShip.Count; j++)
+                {
+                    InfoRelationShip[j].RelationWithHousehold = tempUpdateViewMiddle[i].RelationWithHousehold;
+                    _houseInfoRelationShipRepository.Update(InfoRelationShip[j]);
+                    _houseInfoRelationShipRepository.SaveChanges();
+                }
+
+            }
+
             _inhabitantRepository.UpdateInfo(InhabitantUpdateModel);
+
+
+
+
             return _inhabitantRepository.SaveChanges();
         }
         /// <summary>

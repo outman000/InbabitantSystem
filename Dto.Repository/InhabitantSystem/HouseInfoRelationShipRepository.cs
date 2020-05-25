@@ -1,10 +1,12 @@
 ﻿using Dto.IRepository.InhabitantSystem;
 using Dtol;
 using Dtol.Dtol;
+using Dtol.EfCoreExtion;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using ViewModel.InhabitantSystem.MiddleViewModel;
 using ViewModel.InhabitantSystem.RequestViewModel;
@@ -78,6 +80,33 @@ namespace Dto.Repository.InhabitantSystem
             }
         }
 
+        public List<InfoRelationShip> InfoRelationShipSerachByIdNoWhere(string IdNo)
+        {
 
+            var predicate = SearchInfoRelationShipByIdNoWhere(IdNo);
+            var result = DbSet
+                         //.Include(a=>a.HouseInfo)
+                         //.Include(a=>a.ResidentInfo)
+                         .Where(predicate);
+            if (result.Count() != 0)
+            {
+                return result.ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private Expression<Func<InfoRelationShip, bool>> SearchInfoRelationShipByIdNoWhere(string IdNo)
+        {
+            var predicate = WhereExtension.True<InfoRelationShip>();//初始化where表达式
+            if (IdNo != null)
+            {
+                predicate = predicate.And(p => p.ResidentInfoId.Value.ToString() ==IdNo);
+            }
+       
+            return predicate;
+        }
     }
 }

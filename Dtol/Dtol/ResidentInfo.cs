@@ -129,6 +129,8 @@ namespace Dtol.Dtol
         public  ResidentRelationShip ResidentRelationShips { get; set; }
 
         public  InfoRelationShip InfoRelationShips { get; set; }
+  
+
 
     }
 }

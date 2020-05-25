@@ -17,8 +17,10 @@ namespace Dto.Service.AutoMapper.InhabitantSystem.RequestMapper
             CreateMap<InhabitantAddMiddle, ResidentInfo>();
             //更新
             CreateMap<InhabitantUpdateMiddle, ResidentInfo>();
+            //   .ForMember(dest => dest.InfoRelationShips.RelationWithHousehold, op => op.MapFrom(a => a.RelationWithHousehold));
+            CreateMap<InhabitantUpdateMiddle, InfoRelationShip>();
 
-            CreateMap<InhabitantAndHouseInfoAddMiddle, ResidentInfo>()
+              CreateMap<InhabitantAndHouseInfoAddMiddle, ResidentInfo>()
                 .ForMember(dest => dest.Id, op => op.MapFrom(a => a.InhabitantId))
                 .ForMember(dest => dest.Name, op => op.MapFrom(a => a.Name))
                 .ForMember(dest => dest.Minority, op => op.MapFrom(a => a.Minority))

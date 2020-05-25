@@ -533,8 +533,15 @@ namespace Dto.Repository.InhabitantSystem
             {
                 predicate = predicate.And(p => p.Politics.Contains(residentInfoSearchViewModel.Politics));
             }
-            
 
+            if (residentInfoSearchViewModel.RelationWithHousehold == "租户")
+            {
+                predicate = predicate.And(p => p.InfoRelationShips.RelationWithHousehold == "租户");
+            }
+            if (residentInfoSearchViewModel.RelationWithHousehold == "居民")
+            {
+                predicate = predicate.And(p => p.InfoRelationShips.RelationWithHousehold != "租户");
+            }
 
             return predicate;
         }

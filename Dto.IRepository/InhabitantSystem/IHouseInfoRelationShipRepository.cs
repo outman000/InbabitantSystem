@@ -12,6 +12,6 @@ namespace Dto.IRepository.InhabitantSystem
         void AddHouseInfoRelationShip(List<InfoRelationShip> obj);
 
         void DeleteHouseInfoRelationShip(List<HouseInfoRelationShipDeleteMiddle> obj);
-
+        List<InfoRelationShip> InfoRelationShipSerachByIdNoWhere(string IdNo);
     }
 }
