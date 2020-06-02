@@ -13,7 +13,7 @@ namespace Dto.IRepository.InhabitantSystem
         IQueryable<HouseInfo> HouseInfoSerachByWhere(HouseInfoSearchViewModel houseInfoSearchViewModel);
         void AddHouseInfo(List<HouseInfo> obj);
         void UpdateHouseInfo(List<HouseInfo> obj);
-
+        List<HouseInfo> GetByHouseHolderIdNo(string HouseHolderIdNo);
         int HouseCountByWhere(BuildingSearchViewModel buildingSearchViewModel);
     }
 }

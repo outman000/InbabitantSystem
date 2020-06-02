@@ -17,13 +17,17 @@ namespace Dto.Service.InhabitantSystem
     {
         private readonly IInhabitantRepository _inhabitantRepository;
         private readonly IHouseInfoRelationShipRepository _houseInfoRelationShipRepository;
+        private readonly IPartyInfoRepository _partyInfoRepository;
+        private readonly IHouseInfoRepository _houseInfoRepository;
         private readonly IMapper _IMapper;
         public InhabitantService(IInhabitantRepository inhabitantRepository, IHouseInfoRelationShipRepository  houseInfoRelationShipRepository,
-              IMapper mapper)
+                                 IHouseInfoRepository houseInfoRepository, IPartyInfoRepository partyInfoRepository, IMapper mapper)
         {
 
             _inhabitantRepository = inhabitantRepository;
             _houseInfoRelationShipRepository = houseInfoRelationShipRepository;
+            _partyInfoRepository = partyInfoRepository;
+            _houseInfoRepository = houseInfoRepository;
             _IMapper = mapper;
         }
         /// <summary>
@@ -60,6 +64,92 @@ namespace Dto.Service.InhabitantSystem
             var InhabitantSearchResultModel = _IMapper.Map<List<ResidentInfo>, List<InhabitantSearchMiddle>>(InhabitantSearchResult);
             return InhabitantSearchResultModel;
         }
+
+        /// <summary>
+        /// 单一添加房子和居民关系
+        /// </summary>
+        /// <param name="inhabitantAndHouseInfoAddMiddle"></param>
+        /// <returns></returns>
+        public int AddHouseInfoRelationShipSingle(InhabitantAndHouseInfoAddMiddle inhabitantAndHouseInfoAddMiddle)
+        {
+            var aAddInsertModel = _IMapper.Map<InhabitantAndHouseInfoAddMiddle, InfoRelationShip>(inhabitantAndHouseInfoAddMiddle);
+
+            _houseInfoRelationShipRepository.Add(aAddInsertModel);
+            return _houseInfoRelationShipRepository.SaveChanges();
+        }
+
+        ///// <summary>
+        ///// 批量更新
+        ///// </summary>
+        ///// <param name="inhabitantUpdateViewModel"></param>
+        ///// <returns></returns>
+        //public int Inhabitant_Update(InhabitantUpdateViewModel inhabitantUpdateViewModel)
+        //{
+        //    var tempUpdateViewMiddle = inhabitantUpdateViewModel.inhabitantUpdateViewModel;
+        //    var InhabitantUpdateModel = _IMapper.Map<List<InhabitantUpdateMiddle>, List<ResidentInfo>>(tempUpdateViewMiddle);
+        //  //  var InfoRelationShip = _IMapper.Map<List<InhabitantUpdateMiddle>, List<InfoRelationShip>>(tempUpdateViewMiddle);
+
+        //    //int InhabitantAndHouseInfo_add_Count = 0;
+        //    //foreach (InhabitantUpdateMiddle model in inhabitantUpdateViewModel.inhabitantUpdateViewModel)
+        //    //{
+        //    //    //验证居民是否重复
+        //    //    var checkInhabitant = Inhabitant_ByIdNo_Search(model.IdNumber);
+        //    //    if (checkInhabitant != null)
+        //    //    {
+        //    //        //  var tempUpdateViewMiddle = inhabitantUpdateViewModel.inhabitantUpdateViewModel;
+        //    //        var  InhabitantUpdateModel = _IMapper.Map<InhabitantUpdateMiddle, ResidentInfo>(model);
+        //    for (int i = 0; i < tempUpdateViewMiddle.Count; i++)
+        //    {
+        //          var InfoRelationShip = _houseInfoRelationShipRepository.InfoRelationShipSerachByIdNoWhere(tempUpdateViewMiddle[i].Id.ToString());
+        //                for (int j = 0; j < InfoRelationShip.Count; j++)
+        //                {
+        //                    InfoRelationShip[j].RelationWithHousehold = tempUpdateViewMiddle[i].RelationWithHousehold;
+        //                    _houseInfoRelationShipRepository.Update(InfoRelationShip[j]);
+        //                }                      
+        //         //   }
+        //            _houseInfoRelationShipRepository.SaveChanges();
+        //            _inhabitantRepository.UpdateInfo(InhabitantUpdateModel);
+        //            //InhabitantAndHouseInfo_add_Count++;
+
+        //        //else
+        //        //{
+        //        //    InhabitantAndHouseInfoAddMiddle ia = new InhabitantAndHouseInfoAddMiddle();
+
+        //        //    var aAddInsertModel = _IMapper.Map<InhabitantUpdateMiddle, InhabitantAndHouseInfoAddMiddle>(model);
+        //        //    //  var infos= _inhabitantRepository.GetById(model.HouseHolderId.Value);
+
+        //        //    var infos = _houseInfoRelationShipRepository.InfoRelationShipSerachByIdNoWhere(model.HouseHolderId.Value.ToString());
+        //        //    aAddInsertModel.HouseId = infos[0].HouseInfoId;
+        //        //    aAddInsertModel.RelationShipId = Guid.NewGuid();
+        //        //    aAddInsertModel.InhabitantId = Guid.NewGuid();
+        //        //    //添加居民信息
+        //        //    AddInhabitantSingle(aAddInsertModel);
+
+        //        //    //添加居民和房子关系
+        //        //    AddHouseInfoRelationShipSingle(aAddInsertModel);
+        //        //    InhabitantAndHouseInfo_add_Count++;
+        //        //    //添加党员信息
+        //        //    if (aAddInsertModel.Politics == "中共党员")
+        //        //    {
+        //        //        PartyInfoAddViewModel partyInfoAddViewModel = new PartyInfoAddViewModel();
+        //        //        partyInfoAddViewModel.ResidentId = aAddInsertModel.InhabitantId;
+        //        //        partyInfoAddViewModel.IdNumber = aAddInsertModel.IdNumber;
+
+        //        //        int Party_add_Count = 0;
+        //        //        Party_add_Count = AddPartyInfo(partyInfoAddViewModel);
+        //        //    }
+
+        //        //}
+
+
+        //    }
+
+
+        //    return _inhabitantRepository.SaveChanges();
+        //}
+
+
+
         /// <summary>
         /// 批量更新
         /// </summary>
@@ -67,30 +157,74 @@ namespace Dto.Service.InhabitantSystem
         /// <returns></returns>
         public int Inhabitant_Update(InhabitantUpdateViewModel inhabitantUpdateViewModel)
         {
-            var tempUpdateViewMiddle = inhabitantUpdateViewModel.inhabitantUpdateViewModel;
-            var InhabitantUpdateModel = _IMapper.Map<List<InhabitantUpdateMiddle>, List<ResidentInfo>>(tempUpdateViewMiddle);
-
-            //var InfoRelationShip =  _IMapper.Map<List<InhabitantUpdateMiddle>, List<InfoRelationShip>>(tempUpdateViewMiddle);
-
-            for (int i = 0; i < InhabitantUpdateModel.Count; i++)
+            int InhabitantAndHouseInfo_add_Count = 0;
+            foreach (InhabitantUpdateMiddle model in inhabitantUpdateViewModel.inhabitantUpdateViewModel)
             {
-                var InfoRelationShip = _houseInfoRelationShipRepository.InfoRelationShipSerachByIdNoWhere(InhabitantUpdateModel[i].Id.ToString());
-                for (int j = 0; j < InfoRelationShip.Count; j++)
+                //验证居民是否重复
+                var checkInhabitant = Inhabitant_ByIdNo_Search(model.IdNumber);
+                if (checkInhabitant != null)
                 {
-                    InfoRelationShip[j].RelationWithHousehold = tempUpdateViewMiddle[i].RelationWithHousehold;
-                    _houseInfoRelationShipRepository.Update(InfoRelationShip[j]);
+                    checkInhabitant = _IMapper.Map<InhabitantUpdateMiddle, ResidentInfo>(model, checkInhabitant);
+                    _inhabitantRepository.Update(checkInhabitant);
+                    var InfoRelationShip = _houseInfoRelationShipRepository.InfoRelationShipSerachByIdNoWhere(checkInhabitant.Id.ToString());
+                    for (int j = 0; j < InfoRelationShip.Count; j++)
+                    {
+                        InfoRelationShip[j].RelationWithHousehold = model.RelationWithHousehold;
+                        _houseInfoRelationShipRepository.Update(InfoRelationShip[j]);
+                    }
+
+                    _houseInfoRelationShipRepository.SaveChanges();
                   
+                    InhabitantAndHouseInfo_add_Count++;
+                }
+                else
+                {
+                    InhabitantAndHouseInfoAddMiddle ia = new InhabitantAndHouseInfoAddMiddle();
+                    var aAddInsertModel = _IMapper.Map<InhabitantUpdateMiddle, InhabitantAndHouseInfoAddMiddle>(model);
+                     var infos = _houseInfoRelationShipRepository.InfoRelationShipSerachByIdNoWhere(model.HouseHolderId.Value.ToString());
+
+                    //var infos =_houseInfoRepository.GetByHouseHolderIdNo(model.HouseHolderId.Value.ToString());
+                    aAddInsertModel.HouseId = infos[0].HouseInfoId;
+                    aAddInsertModel.RelationShipId = Guid.NewGuid();
+                    aAddInsertModel.InhabitantId = Guid.NewGuid();
+                    //添加居民信息
+                    AddInhabitantSingle(aAddInsertModel);
+
+                    //添加居民和房子关系
+                    AddHouseInfoRelationShipSingle(aAddInsertModel);
+                    InhabitantAndHouseInfo_add_Count++;
+                    //添加党员信息
+                    if (aAddInsertModel.Politics == "中共党员")
+                    {
+                        PartyInfoAddViewModel partyInfoAddViewModel = new PartyInfoAddViewModel();
+                        partyInfoAddViewModel.ResidentId = aAddInsertModel.InhabitantId;
+                        partyInfoAddViewModel.IdNumber = aAddInsertModel.IdNumber;
+
+                        int Party_add_Count = 0;
+                        Party_add_Count = AddPartyInfo(partyInfoAddViewModel);
+                    }
+
                 }
 
+
             }
-            _houseInfoRelationShipRepository.SaveChanges();
-            _inhabitantRepository.UpdateInfo(InhabitantUpdateModel);
 
 
-
-
-            return _inhabitantRepository.SaveChanges();
+            return InhabitantAndHouseInfo_add_Count;
         }
+
+        /// <summary>
+        /// 添加党员信息
+        /// </summary>
+        /// <param name="partyInfoAddViewModel"></param>
+        /// <returns></returns>
+        public int AddPartyInfo(PartyInfoAddViewModel partyInfoAddViewModel)
+        {
+            var aAddInsertModel = _IMapper.Map<PartyInfoAddViewModel, PartyInfo>(partyInfoAddViewModel);
+            _partyInfoRepository.Add(aAddInsertModel);
+            return _partyInfoRepository.SaveChanges();
+        }
+
         /// <summary>
         /// 单一插入居民信息
         /// </summary>
@@ -104,6 +238,10 @@ namespace Dto.Service.InhabitantSystem
             _inhabitantRepository.Add(aAddInsertModel);
             return _inhabitantRepository.SaveChanges();
         }
+
+
+      
+
 
         /// <summary>
         /// 查询党员的居民信息
@@ -139,5 +277,7 @@ namespace Dto.Service.InhabitantSystem
         {
             return _inhabitantRepository.GetRightAgeSearch(rightAgeSearchViewModel);
         }
+
+  
     }
 }

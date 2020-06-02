@@ -191,6 +191,8 @@ namespace InhabitantSystem.Controllers
             int Inhabitant_Update_Count;
             Inhabitant_Update_Count = _inhabitantService.Inhabitant_Update(inhabitantUpdateViewModel);
             var opinionInfoUpdateResModel = _inhabitantFactory.GetInhabitantUpdateResViewModel();
+
+
             if (Inhabitant_Update_Count > 0)
             {
                 opinionInfoUpdateResModel.baseViewModel.IsSuccess = true;

@@ -29,6 +29,8 @@ namespace Dto.IService.InhabitantSystem
 
         List<RightAgeSearchMiddle> RightAgeSearch(RightAgeSearchViewModel rightAgerSearchViewModel);
 
+        int AddHouseInfoRelationShipSingle(InhabitantAndHouseInfoAddMiddle inhabitantAndHouseInfoAddMiddle);
 
+        int AddPartyInfo(PartyInfoAddViewModel partyInfoAddViewModel);
     }
 }

@@ -46,7 +46,9 @@ namespace InhabitantSystem
 
             #endregion
 
-
+            services.AddCors(options =>
+            options.AddPolicy("cors",
+            p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
 
             #region EFCore
             var connection = Configuration.GetConnectionString("SqlServerConnection");
@@ -150,11 +152,11 @@ namespace InhabitantSystem
             // app.UseAuthentication();//启用验证
 
             //允许所有的域
-            app.UseCors(builder =>
-            {
-                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-            });
-
+            //app.UseCors(builder =>
+            //{
+            //    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            //});
+            app.UseCors("cors");
             app.UseDefaultFiles();
             app.UseStaticFiles();
             // app.UseHttpsRedirection();
@@ -174,7 +176,7 @@ namespace InhabitantSystem
 
 
 
-
+  
             app.UseHttpsRedirection();
             app.UseMvc();
         }

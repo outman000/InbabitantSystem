@@ -26,7 +26,7 @@ namespace Dto.IRepository.InhabitantSystem
 
         List<ByHouseInfoSearchResidentMiddle> getByHouseInfoSearchResident(ByHouseInfoSearchResidentViewModel byHouseInfoSearchResidentViewModel);
 
-        
+        ResidentInfo GetById2(Guid id);
 
         List<IdentitySearchResidentMiddle> getIdentitySearchResident(IdentitySearchResidentViewModel identitySearchResidentViewModel);
 

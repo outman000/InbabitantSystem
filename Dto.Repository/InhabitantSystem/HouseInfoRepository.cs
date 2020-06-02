@@ -133,7 +133,9 @@ namespace Dto.Repository.InhabitantSystem
             return predicate;
         }
 
-
-
+        public List<HouseInfo> GetByHouseHolderIdNo(string HouseHolderIdNo)
+        {
+          return   DbSet.Where(b => b.HouseHolderIdNo == HouseHolderIdNo).ToList();
+        }
     }
 }

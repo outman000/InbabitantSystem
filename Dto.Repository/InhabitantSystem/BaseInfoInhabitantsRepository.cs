@@ -43,6 +43,12 @@ namespace Dto.Repository.InhabitantSystem
         {
             return DbSet.Find(id);
         }
+
+        public ResidentInfo GetById2(Guid id)
+        {
+            return DbSet.Single(a => a.Id == id);
+        }
+
         public void Remove(Guid id)
         {
             DbSet.Remove(DbSet.Find(id));
@@ -616,8 +622,8 @@ namespace Dto.Repository.InhabitantSystem
 
                                 InfoRelationShipId =p.InfoRelationShips.Id,
                                 RelationWithHousehold =p.InfoRelationShips.RelationWithHousehold,
-
-                                HouseHolderIdNo=p.InfoRelationShips.HouseInfo.HouseHolderIdNo,
+                               // HouseHolderIdNo = p.InfoRelationShips.ResidentInfo.IdNumber,
+                                HouseHolderIdNo =p.InfoRelationShips.HouseInfo.HouseHolderIdNo,
                                 Area = p.InfoRelationShips.HouseInfo.Area,
                                 BuildingNo = p.InfoRelationShips.HouseInfo.BuildingNo,
                                 UnitNo = p.InfoRelationShips.HouseInfo.UnitNo,
@@ -680,7 +686,7 @@ namespace Dto.Repository.InhabitantSystem
 
 
         }
-
+     
 
 
         private Expression<Func<ResidentInfo, bool>> SearchStatisticsWhere(StatisticsViewModel statisticsViewModel)
@@ -712,6 +718,8 @@ namespace Dto.Repository.InhabitantSystem
 
             return predicate;
         }
+
+    
         #endregion
 
 

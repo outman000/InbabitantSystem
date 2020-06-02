@@ -11,7 +11,7 @@ namespace ViewModel.InhabitantSystem.MiddleViewModel
         /// 居民信息id
         /// </summary>
 
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         /// <summary>
         /// 姓名
         /// </summary>
@@ -81,6 +81,7 @@ namespace ViewModel.InhabitantSystem.MiddleViewModel
         /// 户主id -- 外键
         /// </summary>
         public Guid? HouseHolderId { get; set; }
+
         /// <summary>
         /// 宗教信仰
         /// </summary>
