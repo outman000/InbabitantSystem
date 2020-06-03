@@ -22,8 +22,9 @@ namespace Dto.Service.AutoMapper.InhabitantSystem.RequestMapper
 
             CreateMap<InhabitantUpdateMiddle, InhabitantAndHouseInfoAddMiddle>();
 
+            CreateMap < ResidentInfo, ResidentInfoMiddleId>();
 
-              CreateMap<InhabitantAndHouseInfoAddMiddle, ResidentInfo>()
+            CreateMap<InhabitantAndHouseInfoAddMiddle, ResidentInfo>()
                 .ForMember(dest => dest.Id, op => op.MapFrom(a => a.InhabitantId))
                 .ForMember(dest => dest.Name, op => op.MapFrom(a => a.Name))
                 .ForMember(dest => dest.Minority, op => op.MapFrom(a => a.Minority))

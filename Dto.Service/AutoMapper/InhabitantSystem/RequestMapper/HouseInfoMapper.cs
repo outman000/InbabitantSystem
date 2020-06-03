@@ -24,6 +24,10 @@ namespace Dto.Service.AutoMapper.InhabitantSystem.RequestMapper
                 .ForMember(dest => dest.HouseNo, op => op.MapFrom(a => a.HouseNo))
                 .ForMember(dest => dest.HouseHolder, op => op.MapFrom(a => a.HouseHolder))
                 .ForMember(dest => dest.HouseHolderIdNo, op => op.MapFrom(a => a.HouseHolderIdNo));
+
+            CreateMap<ResidentInfoMiddleId, HouseInfo>()
+                .ForMember(dest => dest.HouseHolder, op => op.MapFrom(a => a.Name))
+                .ForMember(dest => dest.HouseHolderIdNo, op => op.MapFrom(a => a.IdNumber));
         }
 
     }

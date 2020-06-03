@@ -160,24 +160,33 @@ namespace Dto.Service.InhabitantSystem
             int InhabitantAndHouseInfo_add_Count = 0;
             foreach (InhabitantUpdateMiddle model in inhabitantUpdateViewModel.inhabitantUpdateViewModel)
             {
-                //验证居民是否重复
-                var checkInhabitant = Inhabitant_ByIdNo_Search(model.IdNumber);
-                if (checkInhabitant != null)
+                if (model.Id != null)//说明是修改
                 {
-                    checkInhabitant = _IMapper.Map<InhabitantUpdateMiddle, ResidentInfo>(model, checkInhabitant);
-                    _inhabitantRepository.Update(checkInhabitant);
-                    var InfoRelationShip = _houseInfoRelationShipRepository.InfoRelationShipSerachByIdNoWhere(checkInhabitant.Id.ToString());
+                    var residentInfo = _inhabitantRepository.GetById(model.Id.Value);                    var houseInfo = _houseInfoRepository.GetByHouseHolderIdNo(residentInfo.IdNumber);
+            
+                     residentInfo = _IMapper.Map<InhabitantUpdateMiddle, ResidentInfo>(model, residentInfo);//修改居民信息
+                    _inhabitantRepository.Update(residentInfo);
+                    _inhabitantRepository.SaveChanges();
+
+                    if(houseInfo.Count>0)//说明是房主
+                    {
+                         var result= _IMapper.Map<ResidentInfo, ResidentInfoMiddleId>(residentInfo); 
+                         houseInfo[0] = _IMapper.Map<ResidentInfoMiddleId, HouseInfo>(result, houseInfo[0]);//修改房屋信息
+                        _houseInfoRepository.Update(houseInfo[0]);
+                        _houseInfoRepository.SaveChanges();
+                    }
+                    
+                    var InfoRelationShip = _houseInfoRelationShipRepository.InfoRelationShipSerachByIdNoWhere(residentInfo.Id.ToString());
                     for (int j = 0; j < InfoRelationShip.Count; j++)
                     {
                         InfoRelationShip[j].RelationWithHousehold = model.RelationWithHousehold;
                         _houseInfoRelationShipRepository.Update(InfoRelationShip[j]);
                     }
-
                     _houseInfoRelationShipRepository.SaveChanges();
-                  
+               
                     InhabitantAndHouseInfo_add_Count++;
                 }
-                else
+                else//说明是新增
                 {
                     InhabitantAndHouseInfoAddMiddle ia = new InhabitantAndHouseInfoAddMiddle();
                     var aAddInsertModel = _IMapper.Map<InhabitantUpdateMiddle, InhabitantAndHouseInfoAddMiddle>(model);

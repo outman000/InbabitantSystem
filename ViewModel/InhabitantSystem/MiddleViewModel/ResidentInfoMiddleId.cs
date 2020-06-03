@@ -4,13 +4,8 @@ using System.Text;
 
 namespace ViewModel.InhabitantSystem.MiddleViewModel
 {
-    public class ResidentInfoMiddle
+    public class ResidentInfoMiddleId
     {
-        /// <summary>
-        /// 居民信息id
-        /// </summary>
-
-        public Guid Id { get; set; }
         /// <summary>
         /// 姓名
         /// </summary>
@@ -52,6 +47,19 @@ namespace ViewModel.InhabitantSystem.MiddleViewModel
         /// </summary>
         public string Address { get; set; }
         /// <summary>
+        /// 省
+        /// </summary>
+        public string Province { get; set; }
+        /// <summary>
+        /// 市
+        /// </summary>
+        public string City { get; set; }
+        /// <summary>
+        /// 县
+        /// </summary>
+        public string County { get; set; }
+
+        /// <summary>
         /// 户籍状况
         /// </summary>
         public string Register { get; set; }
@@ -75,10 +83,10 @@ namespace ViewModel.InhabitantSystem.MiddleViewModel
         /// 文化程度
         /// </summary>
         public string Education { get; set; }
-        /// <summary>
-        /// 与户主关系
-        /// </summary>
-        public string RelationWithHousehold { get; set; }
+        ///// <summary>
+        ///// 与户主关系
+        ///// </summary>
+        //public string RelationWithHousehold { get; set; }
         /// <summary>
         /// 户主id -- 外键
         /// </summary>
@@ -103,5 +111,12 @@ namespace ViewModel.InhabitantSystem.MiddleViewModel
         /// 状态  0-删除 1-有效
         /// </summary>
         public string Status { get; set; }
+        /// <summary>
+        /// 添加时间
+        /// </summary>
+        public DateTime? AddTime { get; set; }
+
+
+
     }
 }
