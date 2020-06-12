@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ViewModel.BuildingSystem.RequestViewModel;
+using ViewModel.InhabitantSystem.MiddleViewModel;
 using ViewModel.InhabitantSystem.RequestViewModel;
 
 namespace Dto.IRepository.InhabitantSystem
@@ -15,5 +16,9 @@ namespace Dto.IRepository.InhabitantSystem
         void UpdateHouseInfo(List<HouseInfo> obj);
         List<HouseInfo> GetByHouseHolderIdNo(string HouseHolderIdNo);
         int HouseCountByWhere(BuildingSearchViewModel buildingSearchViewModel);
+
+        IQueryable<HouseInfo> HouseInfoSerachByWhere2(InhabitantAndHouseInfoAddMiddle inhabitantAndHouseInfoAddMiddle);
+
+        IQueryable<HouseInfo> HouseInfoSerachByWhere3(InhabitantUpdateMiddle inhabitantUpdateMiddle);
     }
 }

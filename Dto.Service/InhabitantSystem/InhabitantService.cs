@@ -172,6 +172,20 @@ namespace Dto.Service.InhabitantSystem
                     {
                          var result= _IMapper.Map<ResidentInfo, ResidentInfoMiddleId>(residentInfo); 
                          houseInfo[0] = _IMapper.Map<ResidentInfoMiddleId, HouseInfo>(result, houseInfo[0]);//修改房屋信息
+
+                        var SearchResult = _houseInfoRepository.HouseInfoSerachByWhere3(model).ToList();
+                        if (SearchResult.Count > 0 && houseInfo[0].Id != SearchResult[0].Id)
+                        {
+
+                            return 999999;
+
+                        }
+
+                        houseInfo[0].Area = model.Area;// 小区名称
+                         houseInfo[0].BuildingNo = model.BuildingNo;// 楼号
+                         houseInfo[0].UnitNo= model.UnitNo;// 单元号
+                         houseInfo[0].HouseNo = model.HouseNo;// 门牌号
+
                         _houseInfoRepository.Update(houseInfo[0]);
                         _houseInfoRepository.SaveChanges();
                     }

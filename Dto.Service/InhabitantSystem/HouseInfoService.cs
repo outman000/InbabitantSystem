@@ -68,9 +68,18 @@ namespace Dto.Service.InhabitantSystem
         public int AddHouseInfoSingle(InhabitantAndHouseInfoAddMiddle inhabitantAndHouseInfoAddMiddle)
         {
             var aAddInsertModel = _IMapper.Map<InhabitantAndHouseInfoAddMiddle, HouseInfo>(inhabitantAndHouseInfoAddMiddle);
+            var SearchResult = _houseInfoRepository.HouseInfoSerachByWhere2(inhabitantAndHouseInfoAddMiddle).ToList();
+            if(SearchResult.Count>0)
+            {
+                return 0;
 
-            _houseInfoRepository.Add(aAddInsertModel);
-            return _houseInfoRepository.SaveChanges();
+            }
+            else
+            {
+                _houseInfoRepository.Add(aAddInsertModel);
+                return _houseInfoRepository.SaveChanges();
+            }
+ 
         }
         /// <summary>
         /// 根据小区名查 住户数量

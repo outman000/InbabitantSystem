@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using ViewModel.BuildingSystem.RequestViewModel;
+using ViewModel.InhabitantSystem.MiddleViewModel;
 using ViewModel.InhabitantSystem.RequestViewModel;
 
 namespace Dto.Repository.InhabitantSystem
@@ -61,6 +62,24 @@ namespace Dto.Repository.InhabitantSystem
             return result;
         }
 
+        public IQueryable<HouseInfo> HouseInfoSerachByWhere3(InhabitantUpdateMiddle inhabitantUpdateMiddle)
+        {
+            //查询条件
+            var predicate = SearchHouseInfoWhere3(inhabitantUpdateMiddle);
+            var result = DbSet
+                         .Where(predicate);
+
+            return result;
+        }
+        public IQueryable<HouseInfo> HouseInfoSerachByWhere2(InhabitantAndHouseInfoAddMiddle inhabitantAndHouseInfoAddMiddle)
+        {
+            //查询条件
+            var predicate = SearchHouseInfoWhere2(inhabitantAndHouseInfoAddMiddle);
+            var result = DbSet
+                         .Where(predicate);
+
+            return result;
+        }
         public void Remove(Guid id)
         {
             DbSet.Remove(DbSet.Find(id));
@@ -90,7 +109,32 @@ namespace Dto.Repository.InhabitantSystem
                 DbSet.Add(houseInfo);
             }
         }
+        private Expression<Func<HouseInfo, bool>> SearchHouseInfoWhere2(InhabitantAndHouseInfoAddMiddle inhabitantAndHouseInfoAddMiddle)
+        {
+            var predicate = WhereExtension.True<HouseInfo>();//初始化where表达式
 
+        
+                predicate = predicate.And(p => p.Area==inhabitantAndHouseInfoAddMiddle.Area);
+            predicate = predicate.And(p => p.UnitNo==inhabitantAndHouseInfoAddMiddle.UnitNo);
+            predicate = predicate.And(p => p.BuildingNo==inhabitantAndHouseInfoAddMiddle.BuildingNo);
+            predicate = predicate.And(p => p.HouseNo==inhabitantAndHouseInfoAddMiddle.HouseNo);
+            //predicate = predicate.And(p => p.Status == "1");
+
+            return predicate;
+        }
+        private Expression<Func<HouseInfo, bool>> SearchHouseInfoWhere3(InhabitantUpdateMiddle  inhabitantUpdateMiddle)
+        {
+            var predicate = WhereExtension.True<HouseInfo>();//初始化where表达式
+
+
+            predicate = predicate.And(p => p.Area == inhabitantUpdateMiddle.Area);
+            predicate = predicate.And(p => p.UnitNo == inhabitantUpdateMiddle.UnitNo);
+            predicate = predicate.And(p => p.BuildingNo == inhabitantUpdateMiddle.BuildingNo);
+            predicate = predicate.And(p => p.HouseNo == inhabitantUpdateMiddle.HouseNo);
+            //predicate = predicate.And(p => p.Status == "1");
+
+            return predicate;
+        }
 
         private Expression<Func<HouseInfo, bool>> SearchHouseInfoWhere(HouseInfoSearchViewModel houseInfoSearchViewModel)
         {

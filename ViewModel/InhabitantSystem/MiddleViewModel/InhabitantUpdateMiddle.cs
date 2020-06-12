@@ -102,5 +102,22 @@ namespace ViewModel.InhabitantSystem.MiddleViewModel
         /// 状态  0-删除 1-有效
         /// </summary>
         public string Status { get; set; }
+
+        /// <summary>
+        /// 小区名称
+        /// </summary>
+        public string Area { get; set; }
+        /// <summary>
+        /// 楼号
+        /// </summary>
+        public int? BuildingNo { get; set; }
+        /// <summary>
+        /// 单元号
+        /// </summary>
+        public int? UnitNo { get; set; }
+        /// <summary>
+        /// 门牌号
+        /// </summary>
+        public string HouseNo { get; set; }
     }
 }

@@ -52,7 +52,19 @@ namespace InhabitantSystem.Controllers
         {
             inhabitantAndHouseInfoAddViewModel.inhabitantAndHouseInfoAddMiddles[0].HouseId= Guid.NewGuid();
             //添加房子信息
-            _houseInfoService.AddHouseInfoSingle(inhabitantAndHouseInfoAddViewModel.inhabitantAndHouseInfoAddMiddles[0]);
+          var temp=  _houseInfoService.AddHouseInfoSingle(inhabitantAndHouseInfoAddViewModel.inhabitantAndHouseInfoAddMiddles[0]);
+            InhabitantAndHouseInfoAddResViewModel inhabitantAndHouseInfoAddResViewModel = new InhabitantAndHouseInfoAddResViewModel();
+            if (temp==0)
+            {
+                inhabitantAndHouseInfoAddResViewModel.baseViewModel.IsSuccess = false;
+                inhabitantAndHouseInfoAddResViewModel.AddCount = 0;
+                inhabitantAndHouseInfoAddResViewModel.baseViewModel.Message = "添加失败";
+                inhabitantAndHouseInfoAddResViewModel.baseViewModel.ResponseCode = 200;
+                _ILogger.Information("地址重复，添加失败");
+                return Ok(inhabitantAndHouseInfoAddResViewModel);
+            }
+          
+
             var houseId = inhabitantAndHouseInfoAddViewModel.inhabitantAndHouseInfoAddMiddles[0].HouseId;
 
             int InhabitantAndHouseInfo_add_Count=0;
@@ -192,7 +204,16 @@ namespace InhabitantSystem.Controllers
             Inhabitant_Update_Count = _inhabitantService.Inhabitant_Update(inhabitantUpdateViewModel);
             var opinionInfoUpdateResModel = _inhabitantFactory.GetInhabitantUpdateResViewModel();
 
+             if(Inhabitant_Update_Count== 999999)
+             {
+                opinionInfoUpdateResModel.baseViewModel.IsSuccess = false;
+                opinionInfoUpdateResModel.AddCount = 0;
+                opinionInfoUpdateResModel.baseViewModel.Message = "更改失败";
+                opinionInfoUpdateResModel.baseViewModel.ResponseCode = 200;
+                _ILogger.Information("家庭住址已存在，更改居民信息失败");
+                return Ok(opinionInfoUpdateResModel);
 
+             }
             if (Inhabitant_Update_Count > 0)
             {
                 opinionInfoUpdateResModel.baseViewModel.IsSuccess = true;
@@ -207,7 +228,7 @@ namespace InhabitantSystem.Controllers
                 opinionInfoUpdateResModel.baseViewModel.IsSuccess = false;
                 opinionInfoUpdateResModel.AddCount = 0;
                 opinionInfoUpdateResModel.baseViewModel.Message = "更改失败";
-                opinionInfoUpdateResModel.baseViewModel.ResponseCode = 400;
+                opinionInfoUpdateResModel.baseViewModel.ResponseCode = 200;
                 _ILogger.Information("更改居民信息失败");
                 return BadRequest(opinionInfoUpdateResModel);
             }
