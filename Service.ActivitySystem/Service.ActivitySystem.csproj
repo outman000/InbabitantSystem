@@ -32,6 +32,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AuthentValitor\AuthentValitor.csproj" />
     <ProjectReference Include="..\Dto.IRepository\Dto.IRepository.csproj" />
     <ProjectReference Include="..\Dto.IService\Dto.IService.csproj" />
     <ProjectReference Include="..\Dto.Repository\Dto.Repository.csproj" />

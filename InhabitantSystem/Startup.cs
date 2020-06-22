@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ using AutofacSerilogIntegration;
 using AutoMapper;
 using Dtol;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -19,6 +21,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace InhabitantSystem
@@ -46,9 +49,35 @@ namespace InhabitantSystem
 
             #endregion
 
-            services.AddCors(options =>
-            options.AddPolicy("cors",
-            p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+            #region 验证
+            var audienceConfig = Configuration.GetSection("Audience");
+            var symmetricKeyAsBase64 = audienceConfig["Secret"];
+            var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
+            var signingKey = new SymmetricSecurityKey(keyByteArray);
+
+            services.AddAuthentication(x =>
+            {
+
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(o =>
+                {
+                    o.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = signingKey,//参数配置在下边
+                        ValidateIssuer = true,
+                        ValidIssuer = audienceConfig["Issuer"],//发行人
+                        ValidateAudience = true,
+                        ValidAudience = audienceConfig["Audience"],//订阅人
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero,
+                        RequireExpirationTime = true,
+                    };
+
+                });
+            #endregion
 
             #region EFCore
             var connection = Configuration.GetConnectionString("SqlServerConnection");
@@ -88,6 +117,21 @@ namespace InhabitantSystem
                 var xmlPathModel = Path.Combine(basePath, "ViewModel.xml");
                 c.IncludeXmlComments(xmlPath);
                 c.IncludeXmlComments(xmlPathModel);
+
+                #region Token绑定到ConfigureServices
+                //添加header验证信息
+                //c.OperationFilter<SwaggerHeader>();
+                var security = new Dictionary<string, IEnumerable<string>> { { "Service.InhabitantSystem", new string[] { } }, };
+                c.AddSecurityRequirement(security);
+                //方案名称“Blog.Core”可自定义，上下一致即可
+                c.AddSecurityDefinition("Service.InhabitantSystem", new ApiKeyScheme
+                {
+                    Description = "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）\"",
+                    Name = "Authorization",//jwt默认的参数名称
+                    In = "header",//jwt默认存放Authorization信息的位置(请求头中)
+                    Type = "apiKey"
+                });
+                #endregion
             });
             #endregion
             #region AutoMapper
@@ -152,11 +196,11 @@ namespace InhabitantSystem
             // app.UseAuthentication();//启用验证
 
             //允许所有的域
-            //app.UseCors(builder =>
-            //{
-            //    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-            //});
-            app.UseCors("cors");
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            });
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
             // app.UseHttpsRedirection();

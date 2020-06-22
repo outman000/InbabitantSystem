@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dto.IService.ActivitySystem;
 using Dto.IService.FileUploadSystem;
 using Dtol.Dtol;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -47,7 +48,7 @@ namespace Service.ActivitySystem.Controllers
         /// <param name="activityAddViewModel"></param>
         /// <returns></returns>
         [HttpPost]
-
+        [Authorize]
         public ActionResult<ActivityAddResViewModel> Manage_OpinionInfo_Add(ActivityAddViewModel activityAddViewModel)
         {
             activityAddViewModel.Id = Guid.NewGuid();
@@ -91,6 +92,7 @@ namespace Service.ActivitySystem.Controllers
         /// <param name="activitySearchViewModel"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public ActionResult<ActivitySearchResViewModel> Manage_OpinionInfo_Search(ActivitySearchViewModel activitySearchViewModel)
         {
             var SearchResult = _activityService.Activity_Search(activitySearchViewModel);
@@ -112,6 +114,7 @@ namespace Service.ActivitySystem.Controllers
         /// <param name="activitySearchByIdViewModel"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public ActionResult<ActivitySearchMiddle> Manage_OpinionInfo_SearchById(ActivitySearchByIdViewModel activitySearchByIdViewModel)
         {
             var SearchResult = _activityService.Activity_SearchById(activitySearchByIdViewModel);
@@ -133,6 +136,7 @@ namespace Service.ActivitySystem.Controllers
         /// <param name="activityUpdateViewModel"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public ActionResult<ActivityUpdateResViewModel> Manage_OpinionInfo_Update(ActivityUpdateViewModel activityUpdateViewModel)
         {
             int Activity_Update_Count;
@@ -173,6 +177,7 @@ namespace Service.ActivitySystem.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public ActionResult<FileUpload> Uploadfile(IFormFile files)
         {
             //var files = Request.Form.Files;
@@ -220,6 +225,7 @@ namespace Service.ActivitySystem.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public string DeletefileById(FileUpload fileUpload)
         {
             //删除附件（更新附件状态）
@@ -242,6 +248,7 @@ namespace Service.ActivitySystem.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public ActionResult<ActivityUploadSearchResViewModel> SearchfileById(Guid Id)
         {
 
@@ -259,6 +266,7 @@ namespace Service.ActivitySystem.Controllers
         /// <param name="FormId"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public ActionResult<ActivityUploadSearchResViewModel> SearchfileByActivityId(Guid FormId)
         {
             var SearchResult = new ActivityUploadSearchResViewModel();

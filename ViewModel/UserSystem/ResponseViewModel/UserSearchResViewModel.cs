@@ -21,5 +21,7 @@ namespace ViewModel.UserSystem.ResponseViewModel
         public BaseViewModel baseViewModel;
 
         public int Data;
+
+        public string token;
     }
 }
