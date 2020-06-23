@@ -257,7 +257,7 @@ namespace Dto.Service.InhabitantSystem
         {
             
             var aAddInsertModel = _IMapper.Map<InhabitantAndHouseInfoAddMiddle, ResidentInfo>(inhabitantAndHouseInfoAddMiddle);
-
+            aAddInsertModel.AddTime = DateTime.Now;
             _inhabitantRepository.Add(aAddInsertModel);
             return _inhabitantRepository.SaveChanges();
         }
