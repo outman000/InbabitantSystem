@@ -9,6 +9,7 @@ using Dto.IService.InformSystem;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 using Serilog;
 using ViewModel.InformSystem.MiddleViewModel;
 using ViewModel.InformSystem.RequestViewModel;
@@ -193,14 +194,23 @@ namespace Service.InformSystem.Controllers
         [Authorize]
         private void SendMessage(string telphone,string contcent)
         {
-            
-            var url = "http://172.30.10.242/MessageService.asmx/SendMessage?op=SendMessage&telephone="+ telphone + "&context="+ contcent + "&unit=";
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-            request.Method = "GET";
 
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-            string retString = reader.ReadToEnd();
+            //var url = "http://172.30.10.242/MessageService.asmx/SendMessage?op=SendMessage&telephone="+ telphone + "&context="+ contcent + "&unit=";
+            //HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            //request.Method = "GET";
+
+            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            //StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            //string retString = reader.ReadToEnd();
+
+            var client = new RestClient("http://swj.dongjiang.gov.cn/TestSMS/SmsOutNetwork.asmx/SendMessage");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("phone", telphone);
+            request.AddParameter("content", contcent);
+            IRestResponse response = client.Execute(request);
+
 
         }
 
